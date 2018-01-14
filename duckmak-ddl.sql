@@ -83,7 +83,8 @@ CREATE TABLE Restaurants (
 CREATE TABLE Holdings (
   restaurant_id INT NOT NULL REFERENCES Restaurants (id) ON DELETE CASCADE ON UPDATE CASCADE,
   product_id    INT NOT NULL REFERENCES Products (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-  count         INT NOT NULL CHECK (count >= 0)
+  count         INT NOT NULL CHECK (count >= 0),
+  PRIMARY KEY (restaurant_id, product_id)
 );
 
 CREATE TABLE Workers (
