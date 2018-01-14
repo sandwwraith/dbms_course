@@ -34,7 +34,7 @@ INSERT INTO restaurants VALUES
   (2, 'м. Невский проспект', '3332211');
 INSERT INTO holdings VALUES
   (1, 1, 50),
-  (1, 2, 50),
+  (1, 2, 3),
   (1, 3, 50),
   (2, 2, 100),
   (2, 1, 100),
