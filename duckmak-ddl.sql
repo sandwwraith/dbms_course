@@ -28,7 +28,7 @@ CREATE TABLE Menu(
 CREATE TABLE Recipes(
   id INT NOT NULL PRIMARY KEY,
   steps TEXT NOT NULL,
-  item_id INT NOT NULL REFERENCES Menu(id) on DELETE CASCADE ON UPDATE CASCADE DEFERRABLE,
+  item_id INT NOT NULL UNIQUE REFERENCES Menu(id) on DELETE CASCADE ON UPDATE CASCADE DEFERRABLE,
   product_id INT NOT NULL
 );
 
@@ -37,7 +37,7 @@ ALTER TABLE Menu ADD FOREIGN KEY (recipe_id)
 
 CREATE TABLE Products(
   id INT NOT NULL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL UNIQUE,
   recipe_id INT NOT NULL
 );
 
@@ -73,7 +73,7 @@ CREATE TABLE Supplies(
 
 CREATE TABLE Restaurants(
   id INT NOT NULL PRIMARY KEY,
-  address VARCHAR(100) NOT NULL,
+  address VARCHAR(100) NOT NULL UNIQUE,
   contact VARCHAR(100) NOT NULL
 );
 
@@ -132,3 +132,14 @@ CREATE TABLE OfferItems(
 
 ALTER TABLE Offers ADD FOREIGN KEY (id, item_id)
   REFERENCES OfferItems (offer_id, item_id) ON DELETE NO ACTION ON UPDATE CASCADE DEFERRABLE;
+
+--
+
+CREATE INDEX product_recipe_idx ON Products(recipe_id);
+CREATE INDEX product_recipe_idx ON Recipes(product_id);
+CREATE INDEX worker_name_idx ON Workers(name);
+
+CREATE UNIQUE INDEX promocode_idx ON Offers(promocode) WHERE promocode IS NOT NULL;
+
+
+
